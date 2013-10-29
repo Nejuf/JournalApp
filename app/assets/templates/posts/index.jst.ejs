@@ -1,0 +1,6 @@
+<h1>Posts Index JS</h1>
+<ul>
+	<% _.each(posts, function(post) { %>
+			<li><%= post.escape("title") %></li>
+	<% }) %>
+</ul>
