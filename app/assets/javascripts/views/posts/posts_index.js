@@ -15,6 +15,12 @@ JournalApp.Views.PostsIndex = Backbone.View.extend({
 		return this;
 	},
 
+	remove: function() {
+		this.$el.remove();
+		this.stopListening();
+		return this;
+	},
+
 	onBtnDelete: function(event){
 		//event is jQuery event
 		var postId = parseInt($(event.target).data("id"));
