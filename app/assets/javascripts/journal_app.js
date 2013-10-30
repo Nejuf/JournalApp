@@ -4,16 +4,8 @@ window.JournalApp = {
   Views: {},
   Routers: {},
   initialize: function() {
-		var postsCollection = new JournalApp.Collections.Posts();
-		postsCollection.fetch({
-			success: function(collection, response, options){
-		    var indexView = new JournalApp.Views.PostsIndex({
-		    	collection: collection
-		    });
-				$('#posts-content').append(indexView.render().$el);
-			}
-		});
-
+		new JournalApp.Routers.Posts({ container: $('#posts-content') });
+		Backbone.history.start();
   }
 };
 

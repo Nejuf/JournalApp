@@ -2,7 +2,7 @@
 <ul>
 	<% _.each(posts, function(post) { %>
 			<li>
-				<%= post.escape("title") %>
+				<a href="#posts/<%= post.id %>"><%= post.escape("title") %></a>
 				<input type="submit" class="delete" data-id="<%= post.id %>" value="Delete">
 			</li>
 	<% }) %>
