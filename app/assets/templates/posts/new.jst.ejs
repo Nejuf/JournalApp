@@ -1,0 +1,15 @@
+<h1>Make a New Post!</h1>
+<form class="new" action="#">
+	<label for="post_title">Title</label>
+	<input type="text" name="post[title]" value="<%= post.escape("title") %>" id="post_title">
+	<br>
+
+	<label for="post_body">Body</label>
+	<textarea name="post[body]" id="post_body" rows="10" cols="50"><%= post.escape("body") %></textarea>
+	<br>
+
+	<input type="submit" value="Add Post" class="new">
+</form>
+<br>
+
+<a href="#posts" class="back">Back</a>

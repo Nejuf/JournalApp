@@ -2,8 +2,9 @@ JournalApp.Routers.Posts = Backbone.Router.extend({
 	routes: {
 		"": "index",
 		"posts": "index",
-		"posts/:id": "show",
+		"posts/new": "newForm",
 		"posts/:id/edit": "edit",
+		"posts/:id": "show",
 	},
 
 	initialize: function(options){
@@ -28,6 +29,24 @@ JournalApp.Routers.Posts = Backbone.Router.extend({
 		    });
 				// that.$rootEl.append(indexView.render().$el);
 				that._swapView(indexView);
+			}
+
+		});
+	},
+
+	newForm: function() {
+		var that = this;
+		var postModel = new JournalApp.Models.Post();
+		var postsCollection = new JournalApp.Collections.Posts();
+
+		postsCollection.fetch({
+
+			success: function( collection, response, options ) {
+				var formView = new JournalApp.Views.PostForm({
+					model: postModel,
+					collection: postsCollection });
+
+					that._swapView(formView);
 			}
 
 		});
