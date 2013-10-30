@@ -23,7 +23,7 @@ JournalApp.Views.PostEdit = Backbone.View.extend({
 		var formData = $(event.currentTarget).serializeJSON();
 		// this.model.set(formData.post);//can set in save method
 		this.model.save(formData.post, {
-			patch: true,
+			// patch: true, //changes PUT to PATCH
 
 			success: function(model, response, options) {
 				console.log("Post edited successfully.");
