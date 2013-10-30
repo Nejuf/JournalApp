@@ -1,5 +1,6 @@
 <h1>Post Show</h1>
 <p><%= post.get("title") %></p>
 <p><%= post.get("body") %></p>
-
+<a href="#<%= post.urlRoot %>/<%= post.id %>/edit" class="edit">Edit</a>
+<br>
 <a href="#/" class="back">Back</a>

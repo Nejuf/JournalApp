@@ -2,7 +2,8 @@ JournalApp.Routers.Posts = Backbone.Router.extend({
 	routes: {
 		"": "index",
 		"posts": "index",
-		"posts/:id": "show"
+		"posts/:id": "show",
+		"posts/:id/edit": "edit",
 	},
 
 	initialize: function(options){
@@ -16,7 +17,6 @@ JournalApp.Routers.Posts = Backbone.Router.extend({
 	},
 
 	index: function(){
-		this.$rootEl.empty();
 		var that = this;
 
 		var postsCollection = new JournalApp.Collections.Posts();
@@ -34,13 +34,11 @@ JournalApp.Routers.Posts = Backbone.Router.extend({
 	},
 
 	show: function(id){
-		this.$rootEl.empty();
 		var that = this;
 
 		var postModel = new JournalApp.Models.Post();
 		postModel.id = id;
-		postModel.fetch({//Problem fetching data for a single post.  Can't it be done without the collection?
-		//Improper url perhaps?  Or maybe the controller is not serving JSON for showing a post... I think that's it.
+		postModel.fetch({
 
 			success: function( model, response, options ){
 				var showView = new JournalApp.Views.PostShow({ model: model });
@@ -48,6 +46,20 @@ JournalApp.Routers.Posts = Backbone.Router.extend({
 				that._swapView(showView);
 			}
 
+		});
+	},
+
+	edit: function(id) {
+		var that = this;
+
+		var postModel = new JournalApp.Models.Post();
+		postModel.id = id;
+		postModel.fetch({
+
+			success: function( model, response, options ) {
+				var editView = new JournalApp.Views.PostEdit({ model: model });
+				that._swapView(editView);
+			}
 		});
 	}
 
