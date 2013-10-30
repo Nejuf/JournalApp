@@ -19,10 +19,21 @@ JournalApp.Views.PostEdit = Backbone.View.extend({
 	},
 
 	onEdit: function(event) {
+		var that = this;
 		event.preventDefault();
 		var formData = $(event.currentTarget).serializeJSON();
-		// this.model.set(formData.post);//can set in save method
-		this.model.save(formData.post, {
+
+		this.model.set(formData.post);//can set in save method
+
+		var errors = this.model.validate();
+		if(errors) {
+			_(errors).each(function(error) {
+				that.$el.prepend("<li>" + error + "</li>");
+			});
+			return;
+		}
+
+		this.model.save({}, {
 			// patch: true, //changes PUT to PATCH
 
 			success: function(model, response, options) {
@@ -30,7 +41,8 @@ JournalApp.Views.PostEdit = Backbone.View.extend({
 			},
 
 			error: function(model, xhr, options) {
-				console.log("Errors editing post");
+				console.log("Errors saving edited post");
+				//TODO add server validation messages
 			}
 		});
 
