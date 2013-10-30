@@ -38,9 +38,10 @@ JournalApp.Views.PostForm = Backbone.View.extend({
 			return;
 		}
 
-		this.model.save({
+		this.model.save({}, {
 			success: function(model, response, options) {
 				console.log("Post successfully created and saved to database.");
+				that.collection.add(model);
 			},
 
 			error: function(model, xhr, options) {

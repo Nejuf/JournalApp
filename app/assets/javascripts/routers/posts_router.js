@@ -9,6 +9,24 @@ JournalApp.Routers.Posts = Backbone.Router.extend({
 
 	initialize: function(options){
 		this.$rootEl = options.$rootEl;
+		this.$sideEl = options.$sideEl;
+
+		var that = this;
+
+		this.masterCollection = new JournalApp.Collections.Posts();
+		this.masterCollection.fetch({
+
+			success: function(collection, response, options){
+		    var indexView = new JournalApp.Views.PostsIndex({
+		    	collection: collection
+		    });
+
+				indexView.listenTo(collection, "add change:title reset remove sync", indexView.render);
+
+				that.$sideEl.html(indexView.render().$el);
+			}
+
+		});
 	},
 
 	_swapView: function(newView) {
@@ -18,38 +36,18 @@ JournalApp.Routers.Posts = Backbone.Router.extend({
 	},
 
 	index: function(){
-		var that = this;
-
-		var postsCollection = new JournalApp.Collections.Posts();
-		postsCollection.fetch({
-
-			success: function(collection, response, options){
-		    var indexView = new JournalApp.Views.PostsIndex({
-		    	collection: collection
-		    });
-				// that.$rootEl.append(indexView.render().$el);
-				that._swapView(indexView);
-			}
-
-		});
+		var indexView = new JournalApp.Views.PostsIndex({	collection: this.masterCollection });
+		this._swapView(indexView);
 	},
 
 	newForm: function() {
-		var that = this;
 		var postModel = new JournalApp.Models.Post();
-		var postsCollection = new JournalApp.Collections.Posts();
-
-		postsCollection.fetch({
-
-			success: function( collection, response, options ) {
-				var formView = new JournalApp.Views.PostForm({
-					model: postModel,
-					collection: postsCollection });
-
-					that._swapView(formView);
-			}
-
+		var formView = new JournalApp.Views.PostForm({
+			model: postModel,
+			collection: this.masterCollection
 		});
+
+		this._swapView(formView);
 	},
 
 	show: function(id){

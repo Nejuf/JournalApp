@@ -1,3 +1,12 @@
 // Place all the styles related to the Posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+div#posts-content{
+	float: right;
+	background-color: gray;
+}
+
+div#posts-sidebar {
+	float: left;
+	background-color: yellow;
+}
