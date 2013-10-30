@@ -1,6 +1,9 @@
 <h1>Posts Index JS</h1>
 <ul>
 	<% _.each(posts, function(post) { %>
-			<li><%= post.escape("title") %></li>
+			<li>
+				<%= post.escape("title") %>
+				<input type="submit" class="delete" data-id="<%= post.id %>" value="Delete">
+			</li>
 	<% }) %>
 </ul>

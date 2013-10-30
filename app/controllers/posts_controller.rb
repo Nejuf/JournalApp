@@ -20,11 +20,12 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    # @post = Post.all
+    @post = Post.find(params[:id])
+    @post.destroy
 
-    # respond_to do |format|
-#       format.html {render}
-#       format.json {render json: @post}
-#     end
+    respond_to do |format|
+      # format.html {render}
+      format.json {render json: @post}
+    end
   end
 end
