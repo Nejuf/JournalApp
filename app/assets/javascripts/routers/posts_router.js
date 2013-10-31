@@ -59,7 +59,6 @@ JournalApp.Routers.Posts = Backbone.Router.extend({
 
 			success: function( model, response, options ){
 				var showView = new JournalApp.Views.PostShow({ model: model });
-				// that.$rootEl.append(showView.render().$el);
 				that._swapView(showView);
 			}
 

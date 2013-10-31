@@ -1,6 +1,14 @@
 <h1>Post Show</h1>
-<p><%= post.get("title") %></p>
-<p><%= post.get("body") %></p>
+
+<div class="dblclick-field" data-attr="title">
+	<%= post.get("title") %>
+</div>
+<br>
+
+<div class="dblclick-field" data-attr="body">
+	<%= post.get("body") %>
+</div>
+
 <a href="#<%= post.urlRoot %>/<%= post.id %>/edit" class="edit">Edit</a>
 <br>
 <a href="#/" class="back">Back</a>
